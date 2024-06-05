@@ -44,5 +44,9 @@ public class AppUser {
         this.regDate = LocalDate.now();
 
     }
+    protected void addBookLoan(BookLoan loan) {
+        bookLoans.add((loan));
+        loan.setBorrower(this);
+    }
 }
 

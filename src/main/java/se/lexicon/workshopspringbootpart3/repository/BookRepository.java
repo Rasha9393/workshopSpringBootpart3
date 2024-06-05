@@ -1,6 +1,7 @@
 package se.lexicon.workshopspringbootpart3.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,9 @@ public interface BookRepository extends JpaRepository<Book,String> {
 
     @Query("select b from Book b join BookLoan l where l.loanDate between :date1 and :date2")
     List<Book> findBooksByLoansBetween(@Param("date1") LocalDate date1, @Param("date2") LocalDate date2);
+
+    @Modifying
+    void deleteBookById(int id);
 }
+
+

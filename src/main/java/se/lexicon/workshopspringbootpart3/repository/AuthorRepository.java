@@ -11,7 +11,11 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author,String> {
     List<Author> findAuthorsByFirstName(String firstName);
     List<Author> findAuthorsByLastName(String lastName);
-    List<Author> findAuthorsByFirstNameOrLastNameContainingIgnoreCase(String firstName, String lastName);
+
+    @Query("select a from Author a where a.firstName = :keyword or a.lastName = :keyword")
+    List<Author> findAuthorsByKeyword(String keyword);
+
+
 
     @Query("select a from Author a join Book b where b.id = :bookId")
     List<Author> findAuthorsByBookId(int bookId);
